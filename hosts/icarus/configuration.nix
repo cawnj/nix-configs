@@ -9,6 +9,7 @@ in {
     ../../services/gluster.nix
     ../../services/squid.nix
     ../../services/znapzend.nix
+    ../../services/mysql.nix
     ../../services/ldap
     ../../services/zfsquota
   ];
@@ -35,6 +36,8 @@ in {
 
   services.openldap.urlList = [ "ldap://192.168.0.150:389" ];
 
+  services.mysql.replication.serverId = 1;
+
   # Icarus is providing /storage for now
   services.nfs.server.exports = ''
     /zbackup  *(sec=sys,rw,no_subtree_check,no_root_squash)
@@ -46,4 +49,5 @@ in {
   # Configure backups
   redbrick.znapzendSourceDataset = "zbackup";
   redbrick.znapzendDestDataset = "zbackup/nfs";
+
 }

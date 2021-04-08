@@ -8,6 +8,7 @@ in {
     ../../services/ssh.nix
     ../../services/gluster.nix
     ../../services/squid.nix
+    ../../services/mysql.nix
     ../../services/ldap
   ];
 
@@ -29,4 +30,6 @@ in {
   } // (variables.bondConfig [ "eno1" "eno2" ] "192.168.0.50");
 
   services.openldap.urlList = [ "ldap://192.168.0.50:389" ];
+
+  services.mysql.replication.serverId = 2;
 }
